@@ -1,4 +1,8 @@
 package org.example.artikelmeister.auth;
 
-public record RegisterRequest(String username, String password) {
+import jakarta.validation.constraints.NotBlank;
+
+public record RegisterRequest(
+        @NotBlank(message = "یوزرنیم نباید خالی باشه") String username,
+        @NotBlank(message = "پسورد نباید خالی باشه") String password) {
 }
