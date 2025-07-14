@@ -2,8 +2,8 @@ package org.example.artikelmeister.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.artikelmeister.entity.GermanWord;
 import org.example.artikelmeister.entity.GermanWordCreateRequest;
+import org.example.artikelmeister.entity.GermanWordCreateResponse;
 import org.example.artikelmeister.service.GermanWordService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -21,7 +21,7 @@ public class GermanWordController {
     private final GermanWordService germanWordService;
 
     @PostMapping("/create")
-    ResponseEntity<GermanWord> create(@Valid @RequestBody GermanWordCreateRequest germanWord){
+    ResponseEntity<GermanWordCreateResponse> create(@Valid @RequestBody GermanWordCreateRequest germanWord){
         final var word = germanWordService.create(germanWord);
         return ResponseEntity.ok(word);
     }

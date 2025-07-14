@@ -1,10 +1,7 @@
 package org.example.artikelmeister.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.example.artikelmeister.entity.AppUser;
-import org.example.artikelmeister.entity.CaseType;
-import org.example.artikelmeister.entity.GermanWord;
-import org.example.artikelmeister.entity.GermanWordCreateRequest;
+import org.example.artikelmeister.entity.*;
 import org.example.artikelmeister.repository.GermanWordRepository;
 import org.example.artikelmeister.service.GermanWordService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,7 +14,7 @@ public class GermanWordServiceImpl implements GermanWordService {
     private final CustomUserDetailsServiceImpl customUserDetailsService;
 
     @Override
-    public GermanWord create(GermanWordCreateRequest request) {
+    public GermanWordCreateResponse create(GermanWordCreateRequest request) {
 
         GermanWord germanWord = GermanWord.builder()
                 .word(request.word())
@@ -26,7 +23,8 @@ public class GermanWordServiceImpl implements GermanWordService {
                 .user(getCurrentUser())
                 .build();
 
-        return wordRepository.save(germanWord);
+        final var result = wordRepository.save(germanWord);
+        return GermanWordCreateResponse.from(result);
     }
 
     private AppUser getCurrentUser() {
