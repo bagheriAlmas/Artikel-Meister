@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -16,7 +17,7 @@ import java.util.Collections;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(access = AccessLevel.PRIVATE)
-public class AppUser implements UserDetails {
+public class AppUser implements UserDetails, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,16 +31,16 @@ public class AppUser implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
+    }
+
     public static AppUser of(String username, String password, Role role) {
         return AppUser.builder()
                 .username(username)
                 .password(password)
                 .role(role)
                 .build();
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
     }
 }
