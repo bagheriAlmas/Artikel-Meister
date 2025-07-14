@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.example.artikelmeister.entity.*;
 import org.example.artikelmeister.entity.dto.GermanWordCreateRequest;
 import org.example.artikelmeister.entity.dto.GermanWordCreateResponse;
-import org.example.artikelmeister.entity.enums.CaseType;
 import org.example.artikelmeister.repository.GermanWordRepository;
 import org.example.artikelmeister.service.GermanWordService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,12 +18,7 @@ public class GermanWordServiceImpl implements GermanWordService {
     @Override
     public GermanWordCreateResponse create(GermanWordCreateRequest request) {
 
-        GermanWord germanWord = GermanWord.builder()
-                .word(request.word())
-                .article(request.article())
-                .caseType(CaseType.AKKUSATIV)
-                .user(getCurrentUser())
-                .build();
+        final var germanWord = GermanWord.from(request,getCurrentUser());
 
         final var result = wordRepository.save(germanWord);
         return GermanWordCreateResponse.from(result);
