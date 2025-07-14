@@ -2,8 +2,8 @@ package org.example.artikelmeister.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.artikelmeister.entity.GermanWordCreateRequest;
-import org.example.artikelmeister.entity.GermanWordCreateResponse;
+import org.example.artikelmeister.entity.dto.GermanWordCreateRequest;
+import org.example.artikelmeister.entity.dto.GermanWordCreateResponse;
 import org.example.artikelmeister.service.GermanWordService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

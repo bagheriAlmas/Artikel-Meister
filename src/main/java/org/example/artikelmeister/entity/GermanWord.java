@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.artikelmeister.entity.enums.Article;
+import org.example.artikelmeister.entity.enums.CaseType;
 
 import java.io.Serializable;
 

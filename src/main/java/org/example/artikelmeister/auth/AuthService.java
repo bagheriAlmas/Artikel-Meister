@@ -2,6 +2,7 @@ package org.example.artikelmeister.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.example.artikelmeister.entity.*;
+import org.example.artikelmeister.entity.enums.Role;
 import org.example.artikelmeister.exception.UsernameAlreadyExistsException;
 import org.example.artikelmeister.exception.UsernameNotFoundException;
 import org.example.artikelmeister.repository.UserRepository;

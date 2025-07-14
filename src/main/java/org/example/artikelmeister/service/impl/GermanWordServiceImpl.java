@@ -2,6 +2,9 @@ package org.example.artikelmeister.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.artikelmeister.entity.*;
+import org.example.artikelmeister.entity.dto.GermanWordCreateRequest;
+import org.example.artikelmeister.entity.dto.GermanWordCreateResponse;
+import org.example.artikelmeister.entity.enums.CaseType;
 import org.example.artikelmeister.repository.GermanWordRepository;
 import org.example.artikelmeister.service.GermanWordService;
 import org.springframework.security.core.context.SecurityContextHolder;
