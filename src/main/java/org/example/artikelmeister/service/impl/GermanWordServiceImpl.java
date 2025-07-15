@@ -4,6 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.example.artikelmeister.entity.*;
 import org.example.artikelmeister.entity.dto.GermanWordCreateRequest;
 import org.example.artikelmeister.entity.dto.GermanWordCreateResponse;
+import org.example.artikelmeister.entity.dto.GermanWordFetchResponse;
+import org.example.artikelmeister.entity.enums.Article;
+import org.example.artikelmeister.entity.enums.CaseType;
+import org.example.artikelmeister.exception.GermanWordNotFoundException;
 import org.example.artikelmeister.repository.GermanWordRepository;
 import org.example.artikelmeister.service.GermanWordService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,10 +22,16 @@ public class GermanWordServiceImpl implements GermanWordService {
     @Override
     public GermanWordCreateResponse create(GermanWordCreateRequest request) {
 
-        final var germanWord = GermanWord.from(request,getCurrentUser());
+        final var germanWord = GermanWord.from(request, getCurrentUser());
 
         final var result = wordRepository.save(germanWord);
         return GermanWordCreateResponse.from(result);
+    }
+
+    @Override
+    public GermanWordFetchResponse findWord(String word, Article article, CaseType caseType) {
+        final var germanWord = wordRepository.findGermanWordByWordAndArticleAndCaseType(word, article, caseType).orElseThrow(GermanWordNotFoundException::new);
+        return GermanWordFetchResponse.from(germanWord, getCurrentUser());
     }
 
     private AppUser getCurrentUser() {
