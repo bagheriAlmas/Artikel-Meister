@@ -54,6 +54,12 @@ public class GlobalExceptionHandler {
         return generateException("error.notFound", HttpStatus.NOT_FOUND, locale);
     }
 
+    @ExceptionHandler(GermanWordNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleGermanWordNotFound(GermanWordNotFoundException ex , Locale locale) {
+        logger.warn("GermanWordNotFoundException: {}", ex.getMessage());
+        return generateException("error.germanWord.notFound", HttpStatus.NOT_FOUND, locale);
+    }
+
     private ResponseEntity<Map<String ,String>> generateException(String code, HttpStatus status, Locale locale) {
         String message = messageSource.getMessage(code, null, locale);
         Map<String, String> response = new HashMap<>();
