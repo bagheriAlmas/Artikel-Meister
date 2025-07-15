@@ -3,6 +3,7 @@ package org.example.artikelmeister.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.artikelmeister.entity.dto.GermanWordCreateRequest;
+import org.example.artikelmeister.entity.dto.GermanWordFetchResponse;
 import org.example.artikelmeister.entity.enums.Article;
 import org.example.artikelmeister.entity.enums.CaseType;
 
@@ -40,6 +41,15 @@ public class GermanWord implements Serializable {
                 .article(request.article())
                 .caseType(request.caseType())
                 .user(user)
+                .build();
+    }
+
+    public static GermanWord from(GermanWordFetchResponse request) {
+        return GermanWord.builder()
+                .word(request.word())
+                .article(request.article())
+                .caseType(request.caseType())
+                .user(request.user())
                 .build();
     }
 }
